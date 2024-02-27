@@ -1,0 +1,132 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    
+}
+body{
+    width:100%;
+    height:100vh;
+    background: url(../images/riddlereels_web_games_zoom_hero.webp) center / cover no-repeat;
+}
+
+.header{
+    position: fixed;
+    width: 10;
+    left: 0;
+    top: 0;
+    padding: 0 10px;
+
+}
+
+.navbar{
+    display: flex;
+    align-items: center;
+    max-width: 1500px;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding: 22px 0;
+    background-color: rgba(70, 67, 67, 0.256);
+}
+
+.navbar .logo{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    text-decoration: none;
+}
+
+.navbar .logo img{
+    width: 40px;
+    border-radius: 50%;
+}
+
+.navbar .logo h2{
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #fff;
+    
+}
+
+.navbar .links{
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.navbar .links a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.navbar .links a:hover{
+    color:#c6ea13;
+}
+
+.contact-container{
+    height: 88vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color:#ffffff16;
+}
+
+.contact-left{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap:30px
+}
+.contact-left-title h2{
+    font-weight: 600;
+    color: #fff;
+    font-size: 40px;
+    margin-bottom: 5px;
+    text-align: center;
+  
+}
+.contact-left-title hr{
+    border: none;
+    width: 120px;
+    height: 5px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background-color: #fff;
+
+}
+.contact-inputs{
+    width: 400px;
+    height: 60px;
+    border: none;
+    outline: none;
+    padding-left: 25px;
+    font-weight: 400;
+    color:#fcf9f9;
+    border-radius: 50px;
+    background: #ffffff5f;
+    font-size: 18px;
+    
+}
+
+.contact-inputs:focus{
+    border: 2px solid #c6ea13;
+}
+.contact-inputs::placeholder{
+    color: #fff;
+}
+
+.contact-left button{
+    display: flex;
+    align-items: center;
+    padding: 15px 30px;
+    font-size: 16px;
+    color: black;
+    gap: 10px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(27edeg,#ff994f,#fa6d86);
+    cursor: pointer;
+    font-weight: 600;
+}

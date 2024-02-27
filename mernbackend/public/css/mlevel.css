@@ -1,0 +1,88 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  background: red;
+}
+
+header {
+  background-color: #d8202072;
+  color: #fff;
+  text-align: center;
+  padding: 2rem;
+  font-size: 20px;
+}
+
+#logout-btn {
+  position: absolute;
+  top: 30px;
+  right: 10px;
+  background-color:yellow;
+  color: black;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  height: 50px;
+  width: 80px;
+}
+
+#logout-btn:hover {
+  background-color: #c0392b;
+}
+
+.category-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5rem;
+  margin-top: 110px;
+}
+
+.category {
+  flex-basis: 30%; /* Ensure equal width for three boxes */
+  height: 200px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 20px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.category:hover {
+  transform: scale(1.05);
+}
+
+.category img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+h2 {
+  margin-top: 10px;
+  color: #fff;
+  text-align: center;
+  font-size: 50px;
+  margin-top: 58px;
+}
+
+.easy  {
+  background-color: blue;/* Green color for Easy */
+}
+
+.medium  {
+  background-color: #FFC107; /* Yellow color for Medium */
+}
+
+.hard  {
+  background-color: green; /* Red color for Hard */
+}

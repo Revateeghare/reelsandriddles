@@ -1,0 +1,144 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    
+}
+body{
+    width:100%;
+    height:100vh;
+    background: url(../images/riddlereels_web_games_zoom_hero.webp) center / cover no-repeat;
+}
+
+.header{
+    position: fixed;
+    width: 10;
+    left: 0;
+    top: 0;
+    padding: 0 10px;
+
+}
+
+.navbar{
+    display: flex;
+    align-items: center;
+    max-width: 1500px;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding: 22px 15px;
+    background-color: rgba(184, 178, 178, 0.208);
+}
+
+.navbar .logo{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    text-decoration: none;
+}
+
+.navbar .logo img{
+    width: 40px;
+    border-radius: 50%;
+}
+
+.navbar .logo h2{
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: rgb(248, 244, 244);
+    
+}
+
+.navbar .links{
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.navbar .links a{
+    color: rgb(245, 241, 241);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.navbar .links a:hover{
+    color:#c6ea13;
+}
+
+.heading{
+    width: 90%;
+    display: flex;
+    justify-content: center ;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    margin:20px auto ;
+    color: rgb(247, 244, 244);
+    gap: 10px;
+  }
+  .heading h1{
+    font-size: 50px;
+    color: rgb(250, 243, 243);
+    margin-bottom: 25px;
+    position: relative;
+  }
+  
+  .heading h1::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    display: block;
+    margin: 0 auto;
+    background-color: #4caf50;
+  }
+  
+  .heading h2{
+    font-size: 20px;
+    color: rgb(248, 245, 245) ;
+  }
+  
+  .container{
+    width:90%;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+  
+  .about{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap:wrap ;
+  }
+  .about-image{
+    flex: 1;
+    margin-right: 40px;
+    overflow: hidden;
+  }
+  
+  .about-image img{
+    max-width: 100%;
+    height: auto ;
+    display: block;
+    transform: 0.5s ease;
+    height: 350px;
+    margin-left: 90px;
+  }
+  .about-image:hover img{
+    transform: scale(1.2);
+  }
+  .about-content{
+    flex: 1;
+    color: rgb(251, 249, 249);
+    
+  }
+  .about-content h2{
+    font-size: 30px;
+    margin-bottom: 15px;
+  }
+  .about-content p{
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 600;
+  
+  }

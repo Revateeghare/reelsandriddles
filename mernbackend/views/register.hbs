@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo">
+                <img src="./images/logo.png" alt="logo">
+                <h2>Reel & Riddles </h2>
+            </a>
+            <ul class="links">
+               <li><a href="/">Home</a></li>
+               <li><a href="./demo">Help</a></li>
+               <li><a href="./aboutus">About us</a></li>
+               <li><a href="./contact">Contact us</a></li>
+               <li class="login-btn"><a href="./login">Login</a></li>
+
+               
+            </ul>
+      
+        </nav>
+    </header>
+
+    <div class="contact-container">
+        <form action="/register" method="POST" class="contact-left">
+            <div class="contact-left-title">
+                <h2>Registation</h2>
+                <hr>
+            </div>
+            <input type="text" name="name" placeholder="Your Userame" class="contact-inputs" required>
+            <input type="email" name="email" placeholder="Your Email" class="contact-inputs" required>
+            <input type="password" name="password" placeholder="Your Password" class="contact-inputs" required>
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</body>
+</html>

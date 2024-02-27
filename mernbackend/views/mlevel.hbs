@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Levels Page</title>
+    <link rel="stylesheet" href="./css/mlevel.css">
+</head>
+<body>
+    <header>
+        <h1>Levels Page</h1>
+        <button id="logout-btn" onclick="alert('Logout clicked')">Logout</button>
+    </header>
+
+    <div class="category-container">
+        <div class="category easy" onclick="navigateToGame('./mlevel4')">
+            
+            <h2>Easy</h2>
+        </div>
+
+        <div class="category medium" onclick="navigateToGame('./mlevel2')">
+            
+            <h2>Medium</h2>
+        </div>
+
+        <div class="category hard" onclick="navigateToGame('./mlevel2')">
+            <h2>Hard</h2>
+        </div>
+    </div>
+
+    <script>
+        function navigateToGame(url) {
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>

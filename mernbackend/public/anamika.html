@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    h1 {
+      color: #00796b;
+    }
+
+    #game-container {
+      max-width: 600px;
+      margin: 20px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    #game-container:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #game-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    #game-image:hover {
+      transform: scale(1.1);
+    }
+
+    .option-button {
+      padding: 12px 24px;
+      font-size: 16px;
+      background-color: #00796b;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 5px;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .option-button:hover {
+      background-color: #004d40;
+    }
+
+    #result {
+      font-size: 18px;
+      margin-top: 20px;
+      color: #00796b;
+      transition: color 0.3s ease-in-out;
+    }
+
+    #result:hover {
+      color: #004d40;
+    }
+  </style>
+  <title>Image Guessing Game</title>
+</head>
+<body>
+
+  <h1>Image Guessing Game</h1>
+
+  <div id="game-container">
+    <img id="game-image" src="" alt="Game Image">
+    <br>
+    <button class="option-button" onclick="checkAnswer(0)"></button>
+    <button class="option-button" onclick="checkAnswer(1)"></button>
+    <button class="option-button" onclick="checkAnswer(2)"></button>
+    <button class="option-button" onclick="checkAnswer(3)"></button>
+    <br>
+    <p id="result"></p>
+  </div>
+
+  <script>
+    const images = [
+      {url: "about.jpg", options: ["Option A", "Option B", "Option C", "Option D"], answer: 0},
+      {url: "ben10.jpeg", options: ["Option A", "Option B", "Option C", "Option D"], answer: 2},
+      {url: "bp.jpeg", options: ["Option A", "Option B", "Option C", "Option D"], answer: 1}
+      // Add more image URLs, options, and answers as needed
+    ];
+
+    let currentImageIndex = 0;
+    let timer;
+
+    function initializeGame() {
+      const gameImage = document.getElementById("game-image");
+      const optionButtons = document.querySelectorAll(".option-button");
+      
+      gameImage.src = "images/" + images[currentImageIndex].url;
+
+      // Populate option buttons
+      optionButtons.forEach((button, index) => {
+        button.textContent = images[currentImageIndex].options[index];
+      });
+
+      document.getElementById("result").innerHTML = "";
+
+      // Start the timer (adjust the time limit as needed, currently set to 10 seconds)
+      timer = setTimeout(() => {
+        document.getElementById("result").innerHTML = "Time's up! Try again.";
+      }, 10000);
+    }
+
+    function checkAnswer(selectedOptionIndex) {
+      clearTimeout(timer); // Clear the timer
+
+      const correctAnswerIndex = images[currentImageIndex].answer;
+
+      if (selectedOptionIndex === correctAnswerIndex) {
+        document.getElementById("result").innerHTML = "Correct!";
+      } else {
+        document.getElementById("result").innerHTML = "Incorrect. Try again.";
+        return; // Do not proceed to the next question if the answer is incorrect
+      }
+
+      // Move to the next question
+      currentImageIndex++;
+      if (currentImageIndex < images.length) {
+        initializeGame();
+      } else {
+        document.getElementById("result").innerHTML = "Game Over. You have completed all questions.";
+      }
+    }
+
+    // Load the first image when the page loads
+    window.onload = initializeGame;
+  </script>
+
+</body>
+</html>
