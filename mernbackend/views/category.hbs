@@ -5,11 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Category Page</title>
   <link rel="stylesheet" href="./css/quiz.css">
+  <style>
+    header {
+      position: relative;
+    }
+
+    #exit-btn, #more-games-btn {
+      position: absolute;
+      top: 40px;
+      right: 10px;
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #more-games-btn {
+      right: 100px; /* Adjust the position to your preference */
+    }
+  </style>
 </head>
 <body>
 
   <header>
     <h1>Category Page</h1>
+    <button id="exit-btn">Exit</button>
+    <button id="more-games-btn">More Games</button>
   </header>
 
   <div class="category-container">
@@ -34,6 +57,18 @@
   <h2 class="cartoon">Marvel</h2> 
   <h2 class="kdrama">Cartoon</h2> 
   <h2 class="anime">Anime</h2>
+
+  <script>
+    // Function to handle the exit button click
+    document.getElementById('exit-btn').addEventListener('click', function() {
+      window.location.href = "/"; // Replace 'home-page.html' with your home page URL
+    });
+
+    // Function to handle the more games button click
+    document.getElementById('more-games-btn').addEventListener('click', function() {
+      window.location.href = './mlevel5'; // Replace 'more-games.html' with the URL of your more games page
+    });
+  </script>
 
 </body>
 </html>

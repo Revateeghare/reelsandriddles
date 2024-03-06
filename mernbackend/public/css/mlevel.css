@@ -7,15 +7,26 @@
 body {
   width: 100%;
   height: 100vh;
-  background: red;
+
+}
+#background-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1; /* Place the video behind other content */
+    object-fit: cover; /* Cover the entire viewport */
 }
 
 header {
-  background-color: #d8202072;
+  background-color: #f30707e2;
   color: #fff;
   text-align: center;
   padding: 2rem;
   font-size: 20px;
+  z-index: 1; /* Ensure header is above video */
+    position: relative;
 }
 
 #logout-btn {
@@ -43,6 +54,7 @@ header {
   align-items: center;
   padding: 5rem;
   margin-top: 110px;
+  z-index: 1; 
 }
 
 .category {

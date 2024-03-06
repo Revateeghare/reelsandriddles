@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="./css/mlevel.css">
 </head>
 <body>
+
+    <video autoplay muted loop id="background-video">
+        <source src="./images/a_red abstract background with_1709468122723.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
     <header>
         <h1>Levels Page</h1>
         <button id="logout-btn" onclick="alert('Logout clicked')">Logout</button>
@@ -14,12 +20,10 @@
 
     <div class="category-container">
         <div class="category easy" onclick="navigateToGame('./mlevel4')">
-            
             <h2>Easy</h2>
         </div>
 
         <div class="category medium" onclick="navigateToGame('./mlevel2')">
-            
             <h2>Medium</h2>
         </div>
 

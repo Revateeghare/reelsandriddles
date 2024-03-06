@@ -3,33 +3,92 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="./css/mlevel1.css">
+  <title>More Games</title>
+  <link rel="stylesheet" href="./css/mlevel1.css"> <!-- You can link to a separate CSS file for styling -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: red;
+    }
+
+    header {
+      position: relative;
+      background-color: #007bff;
+      color: white;
+      padding: 5px;
+      text-align: center;
+    }
+
+    #exit-btn {
+      position: absolute;
+      top: 30px;
+      right: 20px;
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .game-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 100px;
+    }
+
+    .game {
+      margin: 10px;
+      text-align: center;
+    }
+
+    .game img {
+      width: 300px;
+      height: 300px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .game h2 {
+      margin: 0;
+    }
+  </style>
 </head>
 <body>
-  
 
+  <header>
+    <h1>More Games</h1>
+    <button id="exit-btn">Exit</button>
+  </header>
 
-  <div class="container">
-    <div id="timer">10</div>
-    <img src="./images/m5.jpg" alt="Image description">
-    <div class="options">
-      <button onclick="selectOption('Agetha Harkness')" id="option1" class="option-btn">Agetha Harkness</button>
-      <button onclick="selectOption('Kate Bishop')" id="option2" class="option-btn">Kate Bishop</button>
-      <button onclick="selectOption('Scarlett Witch')" id="option3" class="option-btn">Scarlett Witch</button>
-      <button onclick="selectOption('Black Widow')" id="option4" class="option-btn">Black Widow</button>
+  <div class="game-container">
+    <div class="game">
+      <a href="./game1"><img src="./images/rps.jpg" alt="Game 1"></a>
+      <h2>Rock Paper Scissors</h2>
     </div>
 
-    <button onclick="checkGuess()" id="submitBtn" disabled>Submit Guess</button>
-    <p id="result"></p>
-    <button  id="next">Next</button>
+    <div class="game">
+      <a href="./mlevel6"><img src="./images/tictactoe.avif" alt="Game 2"></a>
+      <h2>Tic Tac Toe</h2>
+    </div>
+    <div class="game">
+      <a href="./game3"><img src="./images/snake.png" alt="Game 3"></a>
+      <h2>Snake</h2>
+    </div>
 
+    <!-- Add more games as needed -->
   </div>
-  
-  <script src="./js/mlevel1.js"></script>
 
-  
+  <script>
+    // Function to handle the exit button click
+    document.getElementById('exit-btn').addEventListener('click', function() {
+      window.location.href = './home-page.html'; // Replace 'home-page.html' with your home page URL
+    });
+  </script>
 
-  </div>
 </body>
 </html>
