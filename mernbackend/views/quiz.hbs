@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url(./images/ques1tion.webp);
+            background-size: cover;
+        }
+
+        .quiz-container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #question {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .options-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .option {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .option:hover {
+            background-color: #45a049;
+        }
+
+        input[type="text"] {
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        button {
+            margin-top: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin-left: 20px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            display: none;
+        }
+
+        .popup img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+            margin-left: 30px;
+        }
+
+        .popup button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .popup button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Quiz Game</h1>
+        <div id="question"></div>
+        <div class="options-container" id="options"></div>
+        <input type="text" id="answerInput" placeholder="Type your answer...">
+        <button onclick="checkAnswer()">Submit Answer</button>
+        <p id="result"></p>
+    </div>
+
+    <div class="popup" id="popup-wrong">
+        <img src="./images/sad.jpeg" alt="Sad Emoji">
+        <p>Incorrect Answer!</p>
+        <button onclick="hidePopup('popup-wrong')">Continue</button>
+    </div>
+
+    <div class="popup" id="popup-congrats">
+        <img src="./images/happy.jped" alt="Happy Emoji">
+        <p>Congratulations! You've completed the quiz!</p>
+        <button onclick="restartQuiz()">Restart</button>
+        <button onclick="exitQuiz()">Exit</button>
+    </div>
+
+    <script>
+        // Define quiz questions and answers
+        const questions = [
+            {
+                question: "What is the capital of France?",
+                options: ["London", "Paris", "Berlin", "Rome"],
+                answer: "Paris"
+            },
+            {
+                question: "What is the largest planet in our solar system?",
+                options: ["Earth", "Mars", "Saturn", "Jupiter"],
+                answer: "Jupiter"
+            },
+            {
+                question: "Who wrote 'Romeo and Juliet'?",
+                options: ["Charles Dickens", "William Shakespeare", "Jane Austen", "Mark Twain"],
+                answer: "William Shakespeare"
+            },
+            // Add more questions here...
+        ];
+
+        let currentQuestion = 0;
+
+        // Function to display current question and options
+        function displayQuestion() {
+            const questionElement = document.getElementById("question");
+            const optionsContainer = document.getElementById("options");
+            questionElement.innerText = questions[currentQuestion].question;
+            optionsContainer.innerHTML = "";
+            questions[currentQuestion].options.forEach(option => {
+                const button = document.createElement("button");
+                button.innerText = option;
+                button.classList.add("option");
+                button.onclick = function() {
+                    document.getElementById("answerInput").value = option;
+                };
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        // Function to check the answer
+        function checkAnswer() {
+            const userAnswer = document.getElementById("answerInput").value.trim().toLowerCase();
+            const correctAnswer = questions[currentQuestion].answer.toLowerCase();
+
+            if (userAnswer === correctAnswer) {
+                document.getElementById("result").innerText = "Correct!";
+            } else {
+                document.getElementById("result").innerText = "Incorrect. The correct answer is: " + correctAnswer;
+                showPopup('popup-wrong');
+                return;
+            }
+
+            // Move to the next question or end the quiz
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                displayQuestion();
+                document.getElementById("answerInput").value = "";
+            } else {
+                showPopup('popup-congrats');
+            }
+        }
+
+        function showPopup(popupId) {
+            document.getElementById(popupId).style.display = "block";
+        }
+        function hidePopup(popupId) {
+            document.getElementById(popupId).style.display = "none";
+        }
+        function restartQuiz() {
+            currentQuestion = 0;
+            displayQuestion();
+            document.getElementById("answerInput").value = "";
+            hidePopup('popup-congrats');
+        }
+        function exitQuiz() {
+            window.location.reload();
+        }
+        displayQuestion();
+    </script>
+</body>
+</html>

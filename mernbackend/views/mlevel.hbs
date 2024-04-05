@@ -1,34 +1,31 @@
+<link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Levels Page</title>
+    <title> Reel & Riddles</title>
     <link rel="stylesheet" href="./css/mlevel.css">
 </head>
 <body>
 
-    <video autoplay muted loop id="background-video">
-        <source src="./images/a_red abstract background with_1709468122723.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-
+   
     <header>
         <h1>Levels Page</h1>
-        <button id="logout-btn" onclick="alert('Logout clicked')">Logout</button>
+        <a href="./category"><button id="logout-btn">Back</button></a>
     </header>
 
     <div class="category-container">
         <div class="category easy" onclick="navigateToGame('./mlevel4')">
-            <h2>Easy</h2>
+       
         </div>
 
-        <div class="category medium" onclick="navigateToGame('./mlevel2')">
-            <h2>Medium</h2>
+        <div class="category medium" onclick="navigateToGame('./mlevel1')">
+            
         </div>
 
         <div class="category hard" onclick="navigateToGame('./mlevel2')">
-            <h2>Hard</h2>
+          
         </div>
     </div>
 

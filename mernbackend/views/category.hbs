@@ -1,9 +1,10 @@
+<link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Category Page</title>
+  <title> Reel & Riddles</title>
   <link rel="stylesheet" href="./css/quiz.css">
   <style>
     header {
@@ -31,7 +32,7 @@
 
   <header>
     <h1>Category Page</h1>
-    <button id="exit-btn">Exit</button>
+    <a href="/"><button id="exit-btn">Exit</button></a>
     <button id="more-games-btn">More Games</button>
   </header>
 
@@ -41,15 +42,15 @@
     </div>
 
     <div class="category">
-      <img src="./images/cartoon.png" alt="Category 2">
+      <a href="./clevel"><img src="./images/cartoon.png" alt="Category 2"></a>
     </div>
 
     <div class="category">
-      <img src="./images/kdrama (1).jpeg" alt="Category 3">
+      <a href="./klevel"><img src="./images/kdrama (1).jpeg" alt="Category 3"></a>
     </div>
 
     <div class="category">
-      <img src="./images/anime.png" alt="Category 4">
+      <a href="./alevel"><img src="./images/anime.png" alt="Category 4"></a>
     </div>
   </div>
 
@@ -61,7 +62,7 @@
   <script>
     // Function to handle the exit button click
     document.getElementById('exit-btn').addEventListener('click', function() {
-      window.location.href = "/"; // Replace 'home-page.html' with your home page URL
+      window.location.href = "/"; 
     });
 
     // Function to handle the more games button click

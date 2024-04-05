@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bollywood</title>
+  </head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    #container {
+      width: 500px;
+      height: 450px;
+      border: 2px solid #333;
+      border-radius: 10px;
+      padding: 20px;
+      background-color: rgba(
+        255,
+        255,
+        255,
+        0.5
+      ); /* Transparent white background */
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #backgroundVideo {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -1;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      color: #000000;
+    }
+
+    table {
+      border-collapse: collapse;
+      margin: 0 auto;
+    }
+
+    td {
+      width: 100px;
+      height: 100px;
+      border: 2px solid #010101;
+      text-align: center;
+      font-size: 24px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    td:hover {
+      background-color: #ffffff84;
+    }
+
+    #infoBox {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #playerTurnBox,
+    #scoreboardBox {
+      background-color: #ffffff61;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    }
+
+    #modal-content {
+      background-color: #f0f0f0a8;
+    }
+
+    #resetBtn {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #000000;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #resetBtn:hover {
+      background-color: #2a2a2a;
+    }
+  </style>
+  <body>
+    <video id="backgroundVideo" autoplay loop muted>
+      <source src="./image/try1.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <div id="container">
+      <h1>INTELLECT MATRIX</h1>
+      <table>
+        <tr>
+          <td id="cell-0"></td>
+          <td id="cell-1"></td>
+          <td id="cell-2"></td>
+        </tr>
+        <tr>
+          <td id="cell-3"></td>
+          <td id="cell-4"></td>
+          <td id="cell-5"></td>
+        </tr>
+        <tr>
+          <td id="cell-6"></td>
+          <td id="cell-7"></td>
+          <td id="cell-8"></td>
+        </tr>
+      </table>
+
+      <div id="infoBox">
+        <div id="playerTurnBox">
+          <div id="playerTurn">Player X's Turn</div>
+        </div>
+        <div id="scoreboardBox">
+          <div id="scoreboard">Player X: 0 | Player O: 0</div>
+        </div>
+        <button id="resetBtn">Reset</button>
+      </div>
+    </div>
+    <div id="modal" style="display: none">
+      <div id="modal-content">
+        <p id="timer" style="text-align: center;"></p>
+
+        <p id="question"></p>
+        <input id="answerInput" type="text" />
+        <button id="submitAnswer">Submit</button>
+      </div>
+    </div>
+
+    <script>
+      // Define the questions and answers
+      const questions = [
+        {
+          question: "Who directed the movie 'Golmaal'?",
+          options: ["a) Rohit Shetty", "b) Karan Johar"],
+          answer: "Rohit Shetty",
+        },
+        {
+          question:
+            "Which actor played the role of 'Mogambo' in the movie 'Mr. India'?",
+          options: ["a) Amrish Puri", "b) Anupam Kher"],
+          answer: "Amrish Puri",
+        },
+        {
+          question:
+            "Who composed the music for the movie 'Dilwale Dulhania Le Jayenge'?",
+          options: ["a) A.R. Rahman", "b) Jatin-Lalit"],
+          answer: "Jatin-Lalit",
+        },
+        {
+          question: "Which Bollywood movie features the song 'Tum Hi Ho'?",
+          options: ["a) Aashiqui 2", "b) Ek Villain"],
+          answer: "Aashiqui 2",
+        },
+        {
+          question: "Who was the first female superstar of Indian cinema?",
+          options: ["a) Rekha", "b) Sridevi"],
+          answer: "Sridevi",
+        },
+        {
+          question: "Who directed the movie 'Kabhi Alvida Naa Kehna'?",
+          options: ["a) Karan Johar", "b) Sanjay Leela Bhansali"],
+          answer: "Karan Johar",
+        },
+        {
+          question:
+            "Which actor played the role of 'Chulbul Pandey' in the movie 'Dabangg'?",
+          options: ["a) Salman Khan", "b) Ajay Devgn"],
+          answer: "Salman Khan",
+        },
+        {
+          question:
+            "Which Bollywood movie is based on the life of the Indian sprinter Milkha Singh?",
+          options: ["a) Bhaag Milkha Bhaag", "b) Chak De! India"],
+          answer: "Bhaag Milkha Bhaag",
+        },
+        {
+          question:
+            "Who composed the music for the movie 'Hum Dil De Chuke Sanam'?",
+          options: ["a) A.R. Rahman", "b) Ismail Darbar"],
+          answer: "Ismail Darbar",
+        },
+        {
+          question:
+            "Which Bollywood movie features the song 'Chaiyya Chaiyya'?",
+          options: ["a) Dil Se", "b) Rangeela"],
+          answer: "Dil Se",
+        },
+        {
+          question:
+            "Who played the role of 'Rani Padmavati' in the movie 'Padmaavat'?",
+          options: ["a) Deepika Padukone", "b) Alia Bhatt"],
+          answer: "Deepika Padukone",
+        },
+        {
+          question:
+            "Which Bollywood actress won the National Film Award for Best Supporting Actress for her role in the movie 'Chandni Bar'?",
+          options: ["a) Tabu", "b) Rani Mukerji"],
+          answer: "Tabu",
+        },
+        {
+          question: "Who directed the movie 'Kabhi Khushi Kabhie Gham'?",
+          options: ["a) Karan Johar", "b) Sanjay Leela Bhansali"],
+          answer: "Karan Johar",
+        },
+        {
+          question:
+            "Which Bollywood actor is often referred to as the 'Greek God'?",
+          options: ["a) Hrithik Roshan", "b) Shah Rukh Khan"],
+          answer: "Hrithik Roshan",
+        },
+        {
+          question: "Who composed the music for the movie 'Dil Se'?",
+          options: ["a) A.R. Rahman", "b) Vishal-Shekhar"],
+          answer: "A.R. Rahman",
+        },
+        {
+          question:
+            "Who played the role of 'Anjali' in the movie 'Kuch Kuch Hota Hai'?",
+          options: ["a) Kajol", "b) Preity Zinta"],
+          answer: "Kajol",
+        },
+        {
+          question:
+            "Which actor starred in the movie 'Andaz Apna Apna' as 'Amar'?",
+          options: ["a) Aamir Khan", "b) Salman Khan"],
+          answer: "Aamir Khan",
+        },
+        {
+          question: "Who directed the movie 'Gully Boy'?",
+          options: ["a) Zoya Akhtar", "b) Anurag Kashyap"],
+          answer: "Zoya Akhtar",
+        },
+        {
+          question:
+            "Which Bollywood actress won the Filmfare Award for Best Female Debut for her role in the movie 'Student of the Year'?",
+          options: ["a) Alia Bhatt", "b) Sara Ali Khan"],
+          answer: "Alia Bhatt",
+        },
+        {
+          question:
+            "Who played the role of 'Munna Bhai' in the movie 'Munna Bhai M.B.B.S.'?",
+          options: ["a) Sanjay Dutt", "b) Salman Khan"],
+          answer: "Sanjay Dutt",
+        },
+        {
+          question: "Who directed the movie 'Queen'?",
+          options: ["a) Zoya Akhtar", "b) Vikas Bahl"],
+          answer: "Vikas Bahl",
+        },
+        {
+          question:
+            "Which actor played the role of 'Bhuvan' in the movie 'Lagaan'?",
+          options: ["a) Aamir Khan", "b) Shah Rukh Khan"],
+          answer: "Aamir Khan",
+        },
+        {
+          question:
+            "Who composed the music for the movie 'Kabhi Khushi Kabhie Gham'?",
+          options: ["a) A.R. Rahman", "b) Jatin-Lalit"],
+          answer: "Jatin-Lalit",
+        },
+        {
+          question:
+            "Which Bollywood actress is often referred to as the 'Dream Girl'?",
+          options: ["a) Madhuri Dixit", "b) Hema Malini"],
+          answer: "Hema Malini",
+        },
+        {
+          question:
+            "Who played the role of 'Rahul' in the movie 'Dil To Pagal Hai'?",
+          options: ["a) Shah Rukh Khan", "b) Salman Khan"],
+          answer: "Shah Rukh Khan",
+        },
+        {
+          question:
+            "Which Bollywood actor won the National Film Award for Best Actor for his role in the movie 'Piku'?",
+          options: ["a) Amitabh Bachchan", "b) Irrfan Khan"],
+          answer: "Amitabh Bachchan",
+        },
+        {
+          question:
+            "Who choreographed the song 'Chaiyya Chaiyya' from the movie 'Dil Se'?",
+          options: ["a) Farah Khan", "b) Saroj Khan"],
+          answer: "Saroj Khan",
+        },
+        {
+          question:
+            "Which actress made her Bollywood debut with the movie 'Dabangg'?",
+          options: ["a) Sonakshi Sinha", "b) Anushka Sharma"],
+          answer: "Sonakshi Sinha",
+        },
+        {
+          question: "Who composed the music for the movie 'Devdas'?",
+          options: ["a) A.R. Rahman", "b) Ismail Darbar"],
+          answer: "Ismail Darbar",
+        },
+        {
+          question:
+            "Which actor played the role of 'Bajrangi' in the movie 'Bajrangi Bhaijaan'?",
+          options: ["a) Salman Khan", "b) Akshay Kumar"],
+          answer: "Salman Khan",
+        },
+        {
+          question:
+            "Who was the first Indian actress to win the Miss World title?",
+          options: ["a) Aishwarya Rai", "b) Priyanka Chopra"],
+          answer: "Aishwarya Rai",
+        },
+        {
+          question: "Who directed the movie 'Barfi!'?",
+          options: ["a) Anurag Basu", "b) Imtiaz Ali"],
+          answer: "Anurag Basu",
+        },
+        {
+          question:
+            "Which Bollywood actor is known for his role as 'Munna Bhai'?",
+          options: ["a) Sanjay Dutt", "b) Salman Khan"],
+          answer: "Sanjay Dutt",
+        },
+        {
+          question: "Who composed the music for the movie 'Guru'?",
+          options: ["a) A.R. Rahman", "b) Shankar-Ehsaan-Loy"],
+          answer: "A.R. Rahman",
+        },
+        {
+          question:
+            "Which actress played the role of 'Neerja Bhanot' in the movie 'Neerja'?",
+          options: ["a) Deepika Padukone", "b) Sonam Kapoor"],
+          answer: "Sonam Kapoor",
+        },
+        {
+          question: "Who directed the movie 'Bajirao Mastani'?",
+          options: ["a) Sanjay Leela Bhansali", "b) Karan Johar"],
+          answer: "Sanjay Leela Bhansali",
+        },
+        {
+          question:
+            "Which Bollywood actor is often referred to as the 'Khiladi Kumar'?",
+          options: ["a) Salman Khan", "b) Akshay Kumar"],
+          answer: "Akshay Kumar",
+        },
+        {
+          question: "Who composed the music for the movie 'Swades'?",
+          options: ["a) A.R. Rahman", "b) Pritam"],
+          answer: "A.R. Rahman",
+        },
+        {
+          question:
+            "Which actress made her Bollywood debut with the movie 'Om Shanti Om'?",
+          options: ["a) Anushka Sharma", "b) Deepika Padukone"],
+          answer: "Deepika Padukone",
+        },
+        {
+          question: "Who directed the movie 'Dil Chahta Hai'?",
+          options: ["a) Farhan Akhtar", "b) Karan Johar"],
+          answer: "Farhan Akhtar",
+        },
+      ];
+
+      // Initialize game variables
+      let currentPlayer = "X";
+      let cells = Array.from(document.getElementsByTagName("td"));
+      let gameOver = false;
+      let playerXScore = 0;
+      let playerOScore = 0;
+      const timeLimit = 20;
+
+      // Define a function to start the game
+    // Define a function to start the game
+function startGame() {
+  // Reset game variables
+  currentPlayer = "X";
+  gameOver = false;
+  document.getElementById("playerTurn").innerText = `Player ${currentPlayer}'s Turn`;
+
+  // Function to display a prompt with a timer
+// Function to display a prompt with a timer
+function displayModalWithTimer(question, timeLimit, callback, turnSwitchCallback, clickedCell) {
+  document.getElementById("question").innerText = question;
+  document.getElementById("modal").style.display = "block";
+  let timer;
+  let timeLeft = timeLimit / 1000; // Convert milliseconds to seconds
+
+  // Update timer display
+  const updateTimer = () => {
+    document.getElementById("timer").innerText = `Time left: ${timeLeft} seconds`;
+  };
+
+  // Handle answer submission
+  const submitAnswerHandler = () => {
+    clearTimeout(timer);
+    document.getElementById("modal").style.display = "none";
+    let answer = document.getElementById("answerInput").value;
+    callback(answer);
+    // Remove the event listener after handling the answer
+    document.getElementById("submitAnswer").removeEventListener("click", submitAnswerHandler);
+  };
+
+  // Add the event listener for answer submission
+  document.getElementById("submitAnswer").addEventListener("click", submitAnswerHandler);
+
+  // Start the timer
+  updateTimer();
+  timer = setInterval(() => {
+    timeLeft--;
+    updateTimer();
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      document.getElementById("modal").style.display = "none";
+      alert("Time's up!");
+      turnSwitchCallback();
+      // Remove the event listener if the timer runs out
+      document.getElementById("submitAnswer").removeEventListener("click", submitAnswerHandler);
+    }
+  }, 1000);
+}
+
+
+  // Define a function to switch the player's turn
+  function switchTurn() {
+    currentPlayer = currentPlayer === "X" ? "O" : "X";
+    document.getElementById("playerTurn").innerText =` Player ${currentPlayer}'s Turn`;
+  }
+
+  // When a cell is clicked, display the modal dialog with a timer
+  cells.forEach((cell, index) => {
+    cell.addEventListener("click", () => {
+      if (!gameOver && cell.innerHTML === "") {
+        const question = questions[Math.floor(Math.random() * questions.length)];
+        displayModalWithTimer(
+          `${question.question}\n${question.options.join("\n")}`,
+          20000,
+          (playerAnswer) => {
+            let isCorrect =
+              playerAnswer &&
+              playerAnswer.trim().toLowerCase() === question.answer.toLowerCase();
+            if (isCorrect) {
+              alert("Correct answer!");
+              // Correct answer, mark the cell with player's symbol
+              cell.innerHTML = currentPlayer;
+
+              // Check for a win
+              if (checkWin(currentPlayer)) {
+                alert(`Player ${currentPlayer} wins!`);
+                gameOver = true;
+                if (currentPlayer === "X") {
+                  playerXScore++;
+                } else {
+                  playerOScore++;
+                }
+                updateScoreboard();
+              } else if (checkDraw()) {
+                alert("It's a draw!");
+                gameOver = true;
+              } else {
+                // Switch to the other player if the game is still ongoing
+                switchTurn();
+              }
+            } else {
+              // Wrong answer, switch to the other player
+              alert("Wrong answer!");
+              switchTurn();
+            }
+          },
+          () => {
+            // Timer callback function
+            if (!gameOver) {
+              switchTurn();
+            }
+          }
+        );
+      }
+    });
+  });
+}
+
+// Call the startGame function to begin the game
+startGame();
+
+      // Function to check if a player has won
+      function checkWin(player) {
+        const winningCombinations = [
+          [0, 1, 2],
+          [3, 4, 5],
+          [6, 7, 8], // Rows
+          [0, 3, 6],
+          [1, 4, 7],
+          [2, 5, 8], // Columns
+          [0, 4, 8],
+          [2, 4, 6], // Diagonals
+        ];
+
+        return winningCombinations.some((combination) => {
+          return combination.every(
+            (cellIndex) => cells[cellIndex].innerHTML === player
+          );
+        });
+      }
+
+      // Function to check if the game is a draw
+      function checkDraw() {
+        return cells.every((cell) => cell.innerHTML !== "");
+      }
+
+      // Function to update the scoreboard
+      function updateScoreboard() {
+        document.getElementById(
+          "scoreboard"
+        ).innerText =` Player X: ${playerXScore} | Player O: ${playerOScore}`;
+      }
+
+      // Reset button functionality
+      document.getElementById("resetBtn").addEventListener("click", () => {
+        cells.forEach((cell) => {
+          cell.innerHTML = "";
+        });
+        currentPlayer = "X";
+        gameOver = false;
+        document.getElementById(
+          "playerTurn"
+        ).innerText = `Player ${currentPlayer}'s Turn`;
+      });
+    </script>
+  </body>
+</html>

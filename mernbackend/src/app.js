@@ -28,8 +28,8 @@ app.get("/mlevel1", (req , res) => {
 app.get("/mlevel2", (req , res) => {
     res.render("mlevel2")
 });
-app.get("/mlevel3", (req , res) => {
-    res.render("mlevel3")
+app.get("/clevel", (req , res) => {
+    res.render("clevel")
 });
 app.get("/mlevel4", (req , res) => {
     res.render("mlevel4")
@@ -40,17 +40,39 @@ app.get("/mlevel5", (req , res) => {
 app.get("/mlevel6", (req , res) => {
     res.render("mlevel6")
 });
-app.get("/mlevel7", (req , res) => {
-    res.render("mlevel7")
+app.get("/clevel1", (req , res) => {
+    res.render("clevel1")
 });
-app.get("/mlevel8", (req , res) => {
-    res.render("mlevel8")
+app.get("/clevel2", (req , res) => {
+    res.render("clevel2")
 });
-app.get("/mlevel9", (req , res) => {
-    res.render("mlevel9")
+app.get("/clevel3", (req , res) => {
+    res.render("clevel3")
 });
-app.get("/mlevel10", (req , res) => {
-    res.render("mlevel10")
+app.get("/klevel", (req , res) => {
+    res.render("klevel")
+});
+app.get("/klevel1", (req , res) => {
+    res.render("klevel1")
+});
+app.get("/klevel2", (req , res) => {
+    res.render("klevel2")
+});
+app.get("/klevel3", (req , res) => {
+    res.render("klevel3")
+});
+
+app.get("/alevel", (req , res) => {
+    res.render("alevel")
+});
+app.get("/alevel1", (req , res) => {
+    res.render("alevel1")
+});
+app.get("/alevel2", (req , res) => {
+    res.render("alevel2")
+});
+app.get("/alevel3", (req , res) => {
+    res.render("alevel3")
 });
 app.get("/register", (req , res) => {
     res.render("register")
@@ -69,6 +91,9 @@ app.get("/demo", (req , res) => {
 app.get("/contact", (req , res) => {
     res.render("contact")
 });
+app.get("/quiz", (req , res) => {
+    res.render("quiz")
+});
 
 
 
@@ -85,21 +110,19 @@ app.post("/register",async(req , res) => {
 })
 
 
-app.post("/login",async(req , res) => {
-   try{
-    const check=await collection.findOne({name:req.body.name})
-if(check.password===req.body.password)
-{
-    res.render("category")
-}
-   else{
-    res.send("wrong password")
-   }
-   }
-   catch{
-        res.send("wrong deatils")
-   }
-})
+app.post("/login", async (req, res) => {
+    try {
+        const check = await collection.findOne({ name: req.body.name });
+        if (check && check.password === req.body.password) {
+            res.render("category");
+        } else {
+            res.send('<script>alert("Wrong password or details"); window.history.back();</script>');
+        }
+    } catch {
+        res.send('<script>alert("Error occurred. Please try again later."); window.history.back();</script>');
+    }
+});
+
 app.listen(port , () => {
     console.log(`server is running at port no ${port}`);
 });

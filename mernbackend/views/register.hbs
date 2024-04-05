@@ -1,9 +1,10 @@
+<link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title> Reel & Riddles</title>
     <link rel="stylesheet" href="./css/login.css">
 </head>
 <body>
@@ -11,7 +12,7 @@
         <nav class="navbar">
             <a href="#" class="logo">
                 <img src="./images/logo.png" alt="logo">
-                <h2>Reel & Riddles </h2>
+                <h2>Reel & Riddles</h2>
             </a>
             <ul class="links">
                <li><a href="/">Home</a></li>
@@ -19,25 +20,46 @@
                <li><a href="./aboutus">About us</a></li>
                <li><a href="./contact">Contact us</a></li>
                <li class="login-btn"><a href="./login">Login</a></li>
-
-               
             </ul>
-      
         </nav>
     </header>
 
     <div class="contact-container">
-        <form action="/register" method="POST" class="contact-left">
+        <form name="contactForm" action="/register" method="POST" class="contact-left" onsubmit="return validateForm()">
             <div class="contact-left-title">
-                <h2>Registation</h2>
+                <h2>Registration</h2>
                 <hr>
             </div>
-            <input type="text" name="name" placeholder="Your Userame" class="contact-inputs" required>
-            <input type="email" name="email" placeholder="Your Email" class="contact-inputs" required>
-            <input type="password" name="password" placeholder="Your Password" class="contact-inputs" required>
-
+            <input type="text" name="name" id="name" placeholder="Your Username" class="contact-inputs" required>
+            <input type="email" name="email" id="email" placeholder="Your Email" class="contact-inputs" required>
+            <input type="password" name="password" id="password" placeholder="Your Password" class="contact-inputs" required>
             <button type="submit">Register</button>
         </form>
     </div>
+
+    <script>
+        function validateForm() {
+            var name = document.forms["contactForm"]["name"].value;
+            var email = document.forms["contactForm"]["email"].value;
+            var password = document.forms["contactForm"]["password"].value;
+
+            // Validate email format
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert("Invalid email address");
+                return false;
+            }
+
+            // Validate password length (minimum 8 characters)
+            if (password.length < 8) {
+                alert("Password must be at least 8 characters long");
+                return false;
+            }
+
+            // Additional validation logic can be added here if needed
+
+            return true;
+        }
+    </script>
 </body>
 </html>

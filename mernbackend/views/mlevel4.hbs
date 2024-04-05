@@ -1,16 +1,17 @@
+<link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reel & Riddles</title>
+  <title> Reel & Riddles</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       text-align: center;
       margin: 0;
       padding: 0;
-      background-image: url('../images/bg.jpg');
+      background-image: url('../images/ques1tion.webp');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -277,13 +278,39 @@
     .emoji.happy {
       color: green;
     }
+    .points ul {
+  list-style-type: none;
+  padding: 0;
+  text-align: center; /* Center the text */
+}
+
+.points ul li {
+  margin-bottom: 10px;
+}
+
+.total-points-item {
+  font-weight: bold;
+}
+.emoji {
+  font-size: 36px;
+  margin-bottom: 20px;
+  display: none; /* Hide the emoji by default */
+}
+
+.emoji.sad {
+  color: red;
+}
+
+.emoji.happy {
+  color: green;
+}
   </style>
 </head>
 <body>
   
   <nav>
     <h2>Reels And Riddles</h2>
-    <button id="logout-btn" onclick="alert('Logout clicked')">Logout</button>
+    <a href="./mlevel"><button id="logout-btn" >Back</button></a>
   </nav>
 
   <div class="sidebar">
@@ -332,16 +359,24 @@
       <p id="gameWonMessage" class="modal-message"></p>
       <p id="gameWonPoints" class="modal-message"></p>
       <button class="modal-button modal-restart" onclick="restartGame()">Restart Game</button>
-      <button class="modal-button modal-next-level" onclick="nextLevel()">Next Level</button>
+      <button class="modal-button modal-next-level" onclick="next()">Next Level</button>
       <button class="modal-button modal-exit" onclick="exitGame()">Exit</button>
     </div>
   </div>
 
   <script>
     const images = [
-      {url: "m1.jpg", options: ["Agatha Harkness", "Wanda Maximoff", "Scarlet Witch", "Kate Bishop"], answer: 0},
-      {url: "m2.jpg", options: ["Galactus", "Mysterio", "Ultron", "Vision"], answer: 1},
-      {url: "m4.jpg", options: ["Option A", "Option B", "Option C", "Option D"], answer: 2}
+      {url: "m1new.jpg", options: ["Agatha Harkness", "Wanda Maximoff", "Scarlet Witch", "Kate Bishop"], answer: 0},
+      {url: "m2new.jpg", options: ["Galactus", "Mysterio", "Ultron", "Vision"], answer: 1},
+      {url: "m4new.jpg", options: ["Thor: Ragnarok", "WandaVision", "Captain Marvel", "Black Panther"], answer: 0},
+      {url: "m5.webp", options: ["Loki", "Hawkeye", "Doctor Strange", "IronMan"], answer: 3},
+      {url: "m6 (1).jpg", options: ["Gamora", "Nebula", "Echo", "Black Widow"], answer: 2},
+      { url: "endgame.jpg", options: ["Avenger", "Age of Ultron", "Infinity Game", "End Game"], answer: 3 },
+      { url: "m8new.jpeg", options: ["Groot", "Rocket Raccoon", "Star-Lord", "Drax the Destroyer"], answer: 2 },
+      { url: "m9new.jpeg", options: ["Doctor Doom", "Magneto", "Green Goblin", "Red Skull"], answer: 3 },
+      { url: "nebula.jpeg", options: ["Gamora", "Nebula", "Poison Ivy", "Echo"], answer: 1 },
+      { url: "m11new.jpeg", options: ["Vision", "Hawkeye", "Green Goblin", "Darkseid"], answer: 0 }
+
       // Add more image URLs, options, and answers as needed
     ];
 
@@ -400,58 +435,66 @@
     }
 
     function checkAnswer(selectedOptionIndex) {
-      clearInterval(timer); // Clear the timer
+  clearInterval(timer); // Clear the timer
 
-      const correctAnswerIndex = images[currentImageIndex].answer;
+  const correctAnswerIndex = images[currentImageIndex].answer;
 
-      const optionButtons = document.querySelectorAll(".option-button");
+  const optionButtons = document.querySelectorAll(".option-button");
 
-      optionButtons.forEach((button, index) => {
-        if (index === correctAnswerIndex) {
-          button.style.backgroundColor = ""; // Remove background color
-        }
-        button.disabled = true; // Disable buttons after user selection
-      });
-
-      if (selectedOptionIndex === correctAnswerIndex) {
-        document.getElementById("result").innerHTML = "Correct!";
-        correctAnswers++;
-        updatePointsList(true);
-      } else {
-        showGameOverModal("Game Over. Click here to restart.");
-        return; // Do not proceed to the next question if the answer is incorrect
-      }
-
-      // Move to the next question
-      currentImageIndex++;
-      currentQuestionNumber++; // Increment the current question number
-      initializeGame();
+  optionButtons.forEach((button, index) => {
+    if (index === correctAnswerIndex) {
+      button.style.backgroundColor = ""; // Remove background color
     }
+    button.disabled = true; // Disable buttons after user selection
+  });
 
-    function showGameOverModal(message) {
-      const modal = document.getElementById("gameOverModal");
-      modal.style.display = "block";
-      document.getElementById("gameOverMessage").innerHTML = message;
+  if (selectedOptionIndex === correctAnswerIndex) {
+    document.getElementById("result").innerHTML = "Correct!";
+    correctAnswers++;
+    updatePointsList(true);
+  } else {
+    document.getElementById("result").innerHTML = "Wrong!";
+    showGameOverModal("Game Over. Click here to restart.");
+    const sadEmoji = document.querySelector(".emoji.sad");
+    sadEmoji.style.display = "inline"; // Show sad emoji for wrong answer
+    return; // Do not proceed to the next question if the answer is incorrect
+  }
 
-      // Display points earned
-      document.getElementById("gameOverPoints").innerHTML = `Points: ${totalPoints}`;
+  // Move to the next question
+  currentImageIndex++;
+  currentQuestionNumber++; // Increment the current question number
+  initializeGame();
+}
+ 
 
-      // Display sad emoji if points are less than 200
-      if (totalPoints < 200) {
-        document.querySelector(".emoji.sad").style.display = "block";
-      } else {
-        document.querySelector(".emoji.sad").style.display = "none";
-      }
-    }
+   function showGameOverModal(message) {
+  const modal = document.getElementById("gameOverModal");
+  modal.style.display = "block";
+  document.getElementById("gameOverMessage").innerHTML = message;
 
-    function showGameWonModal(message) {
-      const modal = document.getElementById("gameWonModal");
-      modal.style.display = "block";
-      document.getElementById("gameWonMessage").innerHTML = message;
+  // Display points earned
+  document.getElementById("gameOverPoints").innerHTML = `Points: ${totalPoints}`;
 
-      // Display points earned
-      document.getElementById("gameWonPoints").innerHTML = `Points: ${totalPoints}`;
-    }
+  // Always display sad emoji for game over
+  const sadEmoji = document.querySelector(".emoji.sad");
+  sadEmoji.style.display = "inline"; // Show sad emoji
+}
+
+
+
+ function showGameWonModal(message) {
+  const modal = document.getElementById("gameWonModal");
+  modal.style.display = "block";
+  document.getElementById("gameWonMessage").innerHTML = message;
+
+  // Display points earned
+  document.getElementById("gameWonPoints").innerHTML = `Points: ${totalPoints}`;
+
+  // Display happy emoji
+  const happyEmoji = document.querySelector(".emoji.happy");
+  happyEmoji.style.display = "inline";
+}
+
 
     function closeModal(modalId) {
       const modal = document.getElementById(modalId);
@@ -471,23 +514,36 @@
     function exitGame() {
       window.location.href = "./mlevel"; // Redirect to the "./mlevel" page
     }
+function updatePointsList(correct) {
+  const pointsList = document.querySelector(".points ul");
 
-    function nextLevel() {
-      window.location.href = "./mlevel2"; // Redirect to the "./mlevel2" page
-    }
+  // Increase total points by 100 for each correct answer
+  if (correct) {
+    totalPoints += 100;
+  }
 
-    function updatePointsList(correct) {
-      const pointsList = document.querySelector(".points ul");
+  // Create a new list item to display the total points
+  const listItem = document.createElement("li");
+  listItem.textContent = ` ${totalPoints}`;
 
-      // Increase total points by 100 for each correct answer
-      if (correct) {
-        totalPoints += 100;
-      }
+  // Check if there's already a total points item in the list
+  const existingTotalPointsItem = pointsList.querySelector(".total-points-item");
+  if (existingTotalPointsItem) {
+    // If exists, replace it with the updated total points
+    existingTotalPointsItem.textContent = `Total Points: ${totalPoints}`;
+  } else {
+    // If not, append the new total points item to the list
+    listItem.classList.add("total-points-item");
+    pointsList.appendChild(listItem);
+  }
+}
+function next() {
+    // Define the URL of the next level page
+    const nextLevelURL = "./mlevel1"; // Update the URL to "./mlevel2"
 
-      // Clear previous points list
-      pointsList.innerHTML = "";
-    }
-
+    // Redirect the user to the next level page
+    window.location.href = nextLevelURL;
+}
     // Load the first image when the page loads
     window.onload = initializeGame;
   </script>
